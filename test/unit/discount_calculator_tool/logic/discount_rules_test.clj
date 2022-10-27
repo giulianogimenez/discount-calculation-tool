@@ -1,5 +1,5 @@
 (ns discount-calculator-tool.logic.discount-rules-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [clojure.test :refer [deftest are testing]]
             [discount-calculator-tool.logic.discount-rules]))
 
 (deftest allow-discount-rules
@@ -11,11 +11,9 @@
 
 (deftest discout-rules-test
   (testing "given a value of the transaction, when the value is between $100, $1000 and $10000, should categorize the discount"
-    (is(nil?
-          (discount-calculator-tool.logic.discount-rules/calculate-discount 99)))
-    (is(= 5
-         (discount-calculator-tool.logic.discount-rules/calculate-discount 100)))
-    (is(= 7
-        (discount-calculator-tool.logic.discount-rules/calculate-discount 1000)))
-    (is(= 10
-          (discount-calculator-tool.logic.discount-rules/calculate-discount 10000)))))
+    (are [discount expected] (= expected
+      (discount-calculator-tool.logic.discount-rules/calculate-discount discount))
+      99 0
+      100 5
+      1000 7
+      10000 10)))

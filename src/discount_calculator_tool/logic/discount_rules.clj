@@ -7,4 +7,5 @@
   (cond
     (>= value 10000) 10
     (>= value 1000) 7
-    (>= value 100) 5))
+    (>= value 100) 5
+    :else 0))
